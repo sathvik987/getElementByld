@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+
+<body>
+
+    <h1 id="my-id">My First Heading</h1>
+    <p>My first paragraph.</p>
+
+</body>
+
+<script>
+    function customGetElementById(id) {
+
+        function searchForElement(node) {
+            if (node.id === id) {
+                return node;
+            }
+
+            for (const childNode of node.children) {
+                const result = searchForElement(childNode);
+                if (result) {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        const rootNode = document.documentElement;
+
+        return searchForElement(rootNode);
+    }
+
+    const element = customGetElementById("my-id");
+
+    if (element) {
+        console.log("Element found - ", element)
+    } else {
+        console.log("Element not found.");
+    }
+</script>
+
+</html>
